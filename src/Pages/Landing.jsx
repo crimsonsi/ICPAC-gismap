@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MapComponent from "./MapComponent.jsx";
-import Graph from "./Graph";
+import GraphComponent from "./GraphComponent.jsx";
 
 const Landing = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
@@ -116,7 +116,10 @@ const Landing = () => {
           selectedMonth={selectedMonth}
           selectedTenDays={selectedTenDays}
         />
-        <Graph selectedYear={selectedYear} selectedMonth={selectedMonth} />
+        <GraphComponent
+          selectedYear={selectedYear}
+          selectedMonth={selectedMonth}
+        />
       </div>
     </div>
   );

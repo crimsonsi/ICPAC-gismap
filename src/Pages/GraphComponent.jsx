@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactECharts from "echarts-for-react";
 
-const Graph = ({ selectedYear, selectedMonth, selectedTarget }) => {
+const GraphComponent = ({ selectedYear, selectedMonth, selectedTarget }) => {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -21,7 +21,7 @@ const Graph = ({ selectedYear, selectedMonth, selectedTarget }) => {
         if (data && data.chart_data) {
           setChartData(data.chart_data);
         } else {
-          setError("No data available for the given parameters.");
+          setError("No graph available for the given parameters.");
         }
       } catch (error) {
         setError("Error fetching data. Please try again.");
@@ -87,4 +87,4 @@ const Graph = ({ selectedYear, selectedMonth, selectedTarget }) => {
   );
 };
 
-export default Graph;
+export default GraphComponent;
