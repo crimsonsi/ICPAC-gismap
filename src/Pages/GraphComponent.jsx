@@ -74,7 +74,7 @@ const GraphComponent = ({ selectedYear, selectedMonth, selectedTarget }) => {
 
   return (
     <div style={{ marginTop: "20px" }}>
-      <h2>Drought Impact Pie Chart</h2>
+      <h2>Graphical Assessment</h2>
       {loading && <p>Loading data...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {chartData ? (

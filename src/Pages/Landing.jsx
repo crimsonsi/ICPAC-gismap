@@ -17,7 +17,7 @@ const Landing = () => {
     >
       <div style={{ textAlign: "center", marginBottom: "10px" }}>
         <h1 style={{ fontSize: "1.5rem", color: "#4a90e2" }}>
-          Map and Graph Visualisation
+          Drought Impact Visualisation
         </h1>
       </div>
 
