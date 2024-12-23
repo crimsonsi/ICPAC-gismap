@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const GraphViewer = ({ selectedYear, selectedMonth }) => {
+const Graph = ({ selectedYear, selectedMonth }) => {
   const [graphUrl, setGraphUrl] = useState("");
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const GraphViewer = ({ selectedYear, selectedMonth }) => {
   );
 };
 
-export default GraphViewer;
+export default Graph;

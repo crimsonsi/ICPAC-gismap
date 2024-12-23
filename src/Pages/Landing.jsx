@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import MapViewer from "./MapViewer";
-import GraphViewer from "./GraphViewer";
+import MapComponent from "./MapComponent.jsx";
+import Graph from "./Graph";
 
 const Landing = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
@@ -111,15 +111,12 @@ const Landing = () => {
           alignItems: "start",
         }}
       >
-        <MapViewer
+        <MapComponent
           selectedYear={selectedYear}
           selectedMonth={selectedMonth}
           selectedTenDays={selectedTenDays}
         />
-        <GraphViewer
-          selectedYear={selectedYear}
-          selectedMonth={selectedMonth}
-        />
+        <Graph selectedYear={selectedYear} selectedMonth={selectedMonth} />
       </div>
     </div>
   );

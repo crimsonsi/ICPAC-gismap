@@ -5,7 +5,7 @@ import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import TileWMS from "ol/source/TileWMS";
 
-const MapViewer = ({ selectedYear, selectedMonth, selectedTenDays }) => {
+const MapComponent = ({ selectedYear, selectedMonth, selectedTenDays }) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -47,11 +47,28 @@ const MapViewer = ({ selectedYear, selectedMonth, selectedTenDays }) => {
   }, [selectedYear, selectedMonth, selectedTenDays]);
 
   return (
-    <div>
-      <h2>Map Viewer</h2>
-      <div ref={mapRef} style={{ width: "100%", height: "400px" }}></div>
+    <div
+      style={{
+        margin: "20px",
+        padding: "20px",
+        backgroundColor: "#f5f5f5",
+        borderRadius: "10px",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <div
+        ref={mapRef}
+        style={{
+          width: "100%",
+          height: "400px",
+          borderRadius: "8px",
+          overflow: "hidden",
+          border: "2px solid #ddd",
+          backgroundColor: "#fff",
+        }}
+      ></div>
     </div>
   );
 };
 
-export default MapViewer;
+export default MapComponent;
