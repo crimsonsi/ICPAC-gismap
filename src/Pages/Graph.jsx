@@ -1,56 +1,86 @@
 import React, { useState, useEffect } from "react";
+import ReactECharts from "echarts-for-react";
 
-const Graph = ({ selectedYear, selectedMonth }) => {
-  const [graphData, setGraphData] = useState(null);
+const Graph = ({ selectedYear, selectedMonth, selectedTarget }) => {
+  const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  console.log(selectedMonth);
-
   useEffect(() => {
     const fetchGraph = async () => {
-      setLoading(true); // Start loading state
-      setError(null); // Reset error state
+      setLoading(true);
+      setError(null);
 
       try {
-        // Construct the API URL based on the selected year and month
-        const url = `https://droughtwatch.icpac.net/eadw-api/visualization-graphs?year=${selectedYear}&month=${selectedMonth}`;
+        const url = `https://droughtwatch.icpac.net/eadw-api/visualization-graphs?year=${selectedYear}&month=${selectedMonth}&target=Kenya`;
 
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
 
-        if (data.graph_url) {
-          setGraphData(data.graph_url); // Set the graph URL if available
+        if (data && data.chart_data) {
+          setChartData(data.chart_data);
         } else {
-          setError(`No graph for ${selectedMonth}`);
+          setError("No data available for the given parameters.");
         }
       } catch (error) {
-        setError("Failed to fetch graph. Please try again.");
-        console.error("Failed to fetch graph:", error);
+        setError("Error fetching data. Please try again.");
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
-    fetchGraph(); // Fetch graph when component mounts or selectedYear/selectedMonth changes
-  }, [selectedYear, selectedMonth]);
+    fetchGraph();
+  }, [selectedYear, selectedMonth, selectedTarget]);
+
+  const getPieChartOption = () => {
+    if (!chartData) return {};
+
+    // Return the pie chart option based on the fetched data
+    return {
+      title: {
+        text: `Drought Impact - ${selectedTarget}`,
+        subtext: `Data Date: ${selectedYear}-${selectedMonth}-01`,
+        left: "center",
+      },
+      tooltip: {
+        trigger: "item",
+        formatter: "{a} <br/>{b}: {c} ({d}%)",
+      },
+      legend: {
+        orient: "vertical",
+        left: "left",
+        data: chartData.map((item) => item.name), // Assuming chartData has name and value
+      },
+      series: [
+        {
+          name: selectedTarget,
+          type: "pie",
+          radius: "50%",
+          data: chartData.map((item) => ({
+            value: item.value, // assuming each item has 'value'
+            name: item.name, // assuming each item has 'name'
+          })),
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: "rgba(0, 0, 0, 0.5)",
+            },
+          },
+        },
+      ],
+    };
+  };
 
   return (
     <div style={{ marginTop: "20px" }}>
-      <h2>Graph Viewer</h2>
-      {loading && <p>Loading graph...</p>} {/* Show loading message */}
-      {error && <p style={{ color: "red" }}>{error}</p>}{" "}
-      {/* Show error if any */}
-      {graphData && !loading && !error ? (
-        <img
-          src={graphData}
-          alt="Visualization Graph"
-          style={{
-            width: "100%",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-          }}
+      <h2>Drought Impact Pie Chart</h2>
+      {loading && <p>Loading data...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {chartData ? (
+        <ReactECharts
+          option={getPieChartOption()}
+          style={{ height: "400px", width: "100%" }}
         />
       ) : null}
     </div>
