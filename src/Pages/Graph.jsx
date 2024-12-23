@@ -16,6 +16,7 @@ const Graph = ({ selectedYear, selectedMonth, selectedTarget }) => {
 
         const response = await fetch(url);
         const data = await response.json();
+        console.log(data);
 
         if (data && data.chart_data) {
           setChartData(data.chart_data);
@@ -35,7 +36,6 @@ const Graph = ({ selectedYear, selectedMonth, selectedTarget }) => {
   const getPieChartOption = () => {
     if (!chartData) return {};
 
-    // Return the pie chart option based on the fetched data
     return {
       title: {
         text: `Drought Impact - ${selectedTarget}`,
@@ -49,7 +49,7 @@ const Graph = ({ selectedYear, selectedMonth, selectedTarget }) => {
       legend: {
         orient: "vertical",
         left: "left",
-        data: chartData.map((item) => item.name), // Assuming chartData has name and value
+        data: chartData.map((item) => item.name),
       },
       series: [
         {
@@ -57,8 +57,8 @@ const Graph = ({ selectedYear, selectedMonth, selectedTarget }) => {
           type: "pie",
           radius: "50%",
           data: chartData.map((item) => ({
-            value: item.value, // assuming each item has 'value'
-            name: item.name, // assuming each item has 'name'
+            value: item.value,
+            name: item.name,
           })),
           emphasis: {
             itemStyle: {
