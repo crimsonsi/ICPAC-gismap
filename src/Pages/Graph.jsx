@@ -5,6 +5,8 @@ const Graph = ({ selectedYear, selectedMonth }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  console.log(selectedMonth);
+
   useEffect(() => {
     const fetchGraph = async () => {
       setLoading(true); // Start loading state
@@ -21,7 +23,7 @@ const Graph = ({ selectedYear, selectedMonth }) => {
         if (data.graph_url) {
           setGraphData(data.graph_url); // Set the graph URL if available
         } else {
-          setError("No graph URL returned from API.");
+          setError(`No graph for ${selectedMonth}`);
         }
       } catch (error) {
         setError("Failed to fetch graph. Please try again.");

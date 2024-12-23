@@ -17,7 +17,7 @@ const Landing = () => {
     >
       <div style={{ textAlign: "center", marginBottom: "10px" }}>
         <h1 style={{ fontSize: "1.5rem", color: "#4a90e2" }}>
-          GIS Developer Practical Exercise
+          Map and Graph Visualisation
         </h1>
       </div>
 
