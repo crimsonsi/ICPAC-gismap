@@ -12,7 +12,7 @@ const GraphComponent = ({ selectedYear, selectedMonth, selectedTarget }) => {
       setError(null);
 
       try {
-        const url = `https://droughtwatch.icpac.net/eadw-api/visualization-graphs?year=${selectedYear}&month=${selectedMonth}&target=Kenya`;
+        const url = `https://droughtwatch.icpac.net/eadw-api/visualization-graphs?year=${selectedYear}&month=${selectedMonth}&target=${selectedTarget}`;
 
         const response = await fetch(url);
         const data = await response.json();
