@@ -21,7 +21,7 @@ const GraphComponent = ({ selectedYear, selectedMonth, selectedTarget }) => {
         if (data && data.chart_data) {
           setChartData(data.chart_data);
         } else {
-          setError("No graph available for the given parameters.");
+          setError("No graph available for the selected date.");
         }
       } catch (error) {
         setError("Error fetching data. Please try again.");

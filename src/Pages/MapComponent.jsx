@@ -4,6 +4,7 @@ import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import TileWMS from "ol/source/TileWMS";
+import { fromLonLat } from "ol/proj";
 
 const MapComponent = ({ selectedYear, selectedMonth, selectedTenDays }) => {
   const mapRef = useRef(null);
@@ -19,7 +20,7 @@ const MapComponent = ({ selectedYear, selectedMonth, selectedTenDays }) => {
         VERSION: "1.1.1",
         REQUEST: "GetMap",
         SRS: "EPSG:4326",
-        BBOX: "29.5,-11.5,51.5,23.5", // East Africa bounding box
+        BBOX: "29.5,-11.5,51.5,23.5",
         SELECTED_YEAR: selectedYear,
         SELECTED_DMONTH: selectedMonth,
         SELECTED_TENDAYS: selectedTenDays,
@@ -31,15 +32,14 @@ const MapComponent = ({ selectedYear, selectedMonth, selectedTenDays }) => {
       target: mapRef.current,
       layers: [
         new TileLayer({
-          source: new OSM(), // OpenStreetMap base layer
+          source: new OSM(),
         }),
         new TileLayer({
-          source: wmsSource, // WMS layer
+          source: wmsSource,
         }),
       ],
       view: new View({
-        center: [4043800, 1450200], // Nairobi in EPSG:3857
-        zoom: 6,
+        center: fromLonLat([36.8219, -1.2921]),
       }),
     });
 
