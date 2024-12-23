@@ -40,6 +40,7 @@ const MapComponent = ({ selectedYear, selectedMonth, selectedTenDays }) => {
       ],
       view: new View({
         center: fromLonLat([36.8219, -1.2921]),
+        zoom: 4,
       }),
     });
 
